@@ -21,7 +21,10 @@ function data(){
 
 function codi(){
     let a = prompt("Introdueix un codi de barres");
-    const control = parseInt(a.length-1);
+
+    let control = a[a.length-1];
+
+    
 
     while (a.length < 8) {
         a = "0" + a;
@@ -30,31 +33,50 @@ function codi(){
     while (a.length > 8 && a.length < 13) {
         a = "0" + a;
     }
-    
-    let suma = 0;
-    console.log(a);
 
-    
-    for(let i = a.length-2; i >= 0; i--) {
-        let b;
-        if(i % 2){
-            b = parseInt(a[i]) * 3;
-            suma = suma+b;
-        } else {
-            b = parseInt(a[i]) * 1;
-            suma = suma+b;
+    let suma = 0;
+
+    if(a.length == 8){
+
+        for (let i = a.length-2; i >= 0; i--) {
+            if (i % 2 == 0) {
+                suma += parseInt(a[i]) * 3;
+            } else {
+                suma += parseInt(a[i]) * 1;
+            }
         }
 
-        
+        let multiplo = Math.ceil(suma / 10) * 10;
+        let resultat = multiplo - suma;
 
+        if (resultat - control == 0) {
+            console.log("El codi és correcte");
+        } else {
+            console.log("El codi és incorrecte");
+        }
 
+    } else if (a.length == 13) {
+
+        for (let i = 0; i < a.length-1; i++) {
+            if (i % 2 == 0) {
+                suma += parseInt(a[i]) * 1;
+            } else {
+                suma += parseInt(a[i]) * 3;
+            }
+        }
+
+        let multiplo = Math.ceil(suma / 10) * 10;
+        let resultat = multiplo - suma;
+
+        if (resultat - control == 0) {
+            console.log("El codi és correcte");
+        } else {
+            console.log("El codi és incorrecte");
+        }
+
+    } else {
+        console.log("El codi és incorrecte");
     }
-
-    console.log(suma);
-    console.log(control);
-    
-        
-
 
     
 }
