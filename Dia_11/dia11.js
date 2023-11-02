@@ -22,9 +22,7 @@ function data(){
 function codi(){
     let a = prompt("Introdueix un codi de barres");
 
-    let control = a[a.length-1];
-
-    
+    let control = a[a.length-1]; 
 
     while (a.length < 8) {
         a = "0" + a;
@@ -36,39 +34,11 @@ function codi(){
 
     let suma = 0;
 
-    if(a.length == 8){
+    if(a.length == 8 || a.length == 13){
 
-        for (let i = a.length-2; i >= 0; i--) {
-            if (i % 2 == 0) {
-                suma += parseInt(a[i]) * 3;
-            } else {
-                suma += parseInt(a[i]) * 1;
-            }
-        }
+        suma = recorrido(a);
 
-        let multiplo = Math.ceil(suma / 10) * 10;
-        let resultat = multiplo - suma;
-
-        if (resultat - control == 0) {
-            console.log("El codi és correcte");
-        } else {
-            console.log("El codi és incorrecte");
-        }
-
-    } else if (a.length == 13) {
-
-        for (let i = 0; i < a.length-1; i++) {
-            if (i % 2 == 0) {
-                suma += parseInt(a[i]) * 1;
-            } else {
-                suma += parseInt(a[i]) * 3;
-            }
-        }
-
-        let multiplo = Math.ceil(suma / 10) * 10;
-        let resultat = multiplo - suma;
-
-        if (resultat - control == 0) {
+        if (suma - control == 0) {
             console.log("El codi és correcte");
         } else {
             console.log("El codi és incorrecte");
@@ -76,7 +46,28 @@ function codi(){
 
     } else {
         console.log("El codi és incorrecte");
+    }    
+}
+
+
+
+function recorrido(a) {
+    let par = 1;
+    let suma = 0;
+
+    for(let i = a.length-2; i >= 0 ; i--){
+
+        if(par % 2 == 0) {
+            suma+= parseInt(a[i]) * 1;
+        } else {
+            suma+= parseInt(a[i]) * 3;
+        }
+        
+        par++;
     }
 
-    
+    let multiplo = Math.ceil(suma / 10) * 10;
+    let resultat = multiplo - suma;
+
+    return resultat;
 }
